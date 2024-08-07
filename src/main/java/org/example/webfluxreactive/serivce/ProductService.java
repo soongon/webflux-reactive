@@ -14,7 +14,7 @@ public class ProductService {
 
     // 전체 상품보기..
     public Flux<Product> getAllProducts() {
-        return productRepository.selectAllProduct();
+        return productRepository.findAll();
     }
 
 }
