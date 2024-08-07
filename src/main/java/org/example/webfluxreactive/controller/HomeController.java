@@ -1,12 +1,20 @@
 package org.example.webfluxreactive.controller;
 
+import org.example.webfluxreactive.model.Product;
+import org.example.webfluxreactive.serivce.ProductService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.math.BigDecimal;
+
 @RestController
 public class HomeController {
+
+    @Autowired
+    private ProductService productService;
 
     @GetMapping("/")
     public Mono<String> home() {
@@ -14,10 +22,7 @@ public class HomeController {
     }
 
     @GetMapping("/products")
-    public Flux<String> products() {
-        return Flux.just("Apple", "Banana", "Orange", "Grape")
-                .filter(s -> s.length() > 2)
-                .map(s -> s.substring(0, 2));
-                //.map(s -> s.substring(2));
+    public Flux<Product> products() {
+        return productService.getAllProducts();
     }
 }
