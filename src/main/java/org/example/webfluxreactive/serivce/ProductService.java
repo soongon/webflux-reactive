@@ -25,4 +25,15 @@ public class ProductService {
     public Mono<Product> addProduct(Product product) {
         return productRepository.save(product);
     }
+
+    public Mono<Product> modifyProduct(Product product) {
+        return productRepository
+                .findById(product.getId())  // Mono<Product>
+                .flatMap(p -> {
+                    p.setName(product.getName());
+                    p.setPrice(product.getPrice());
+                    p.setLikes(product.getLikes());
+                    return productRepository.save(p);
+                });
+    }
 }

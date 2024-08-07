@@ -34,4 +34,10 @@ public class HomeController {
     public Mono<Product> addProduct(@RequestBody Product product) {
         return productService.addProduct(product);
     }
+
+    @PutMapping("/products")
+    public Mono<Product> updateProduct(@RequestBody Product product) {
+        return productService.modifyProduct(product);
+    }
+
 }
